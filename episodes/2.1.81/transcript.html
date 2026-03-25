@@ -1,0 +1,27 @@
+<p><strong>Claude Code v2.1.81</strong> - March 20, 2026</p>
+<p><a href="https://www.claudeupdates.dev/version/2.1.81">Full changelog</a> | <a href="https://code.claude.com/docs/en/changelog">Official docs</a></p>
+
+<h3>New Features</h3>
+<ul>
+<li><strong>Bare mode</strong> - <code>--bare</code> flag for scripted <code>-p</code> calls skips hooks, LSP, plugin sync, skill walks. Great for CI/automation.</li>
+<li><strong>Channels permission relay</strong> - Channel servers can forward tool approval prompts to your phone for remote approval.</li>
+</ul>
+
+<h3>Notable Fixes</h3>
+<ul>
+<li>Concurrent session auth - multiple sessions no longer force repeated re-auth when one refreshes OAuth</li>
+<li>Voice mode no longer swallows retry failures with misleading "check your network" message</li>
+<li>Voice audio recovers when server silently drops WebSocket</li>
+<li>Background agent race condition - task output hanging between polling intervals</li>
+<li>Worktree session resume now switches back to the worktree automatically</li>
+</ul>
+
+<h3>Improvements</h3>
+<ul>
+<li>MCP tool calls collapse into single "Queried server" line (expand with Ctrl+O)</li>
+<li>Claude suggests <code>!</code> bash mode when you need interactive commands</li>
+<li>Ref-tracked plugins re-clone on load for freshness</li>
+<li>MCP OAuth supports CIMD for servers without Dynamic Client Registration</li>
+<li>Plan mode hides "clear context" by default</li>
+<li>Line-by-line streaming disabled on Windows/WSL due to rendering issues</li>
+</ul>

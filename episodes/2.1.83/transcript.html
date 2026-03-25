@@ -1,0 +1,43 @@
+<p><strong>Claude Code v2.1.83</strong> - March 25, 2026 (76 changes)</p>
+<p><a href="https://www.claudeupdates.dev/version/2.1.83">Full changelog</a> | <a href="https://code.claude.com/docs/en/changelog">Official docs</a></p>
+
+<h3>New Features</h3>
+<ul>
+<li><strong>Transcript search</strong> - Press <code>/</code> in transcript mode (Ctrl+O) to search, <code>n</code>/<code>N</code> to jump between matches</li>
+<li><strong>Credential scrubbing</strong> - <code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1</code> strips API keys from subprocesses (bash, hooks, MCP servers)</li>
+<li><strong>CwdChanged/FileChanged hooks</strong> - Reactive environment management (e.g., direnv auto-loading)</li>
+<li><strong>sandbox.failIfUnavailable</strong> - Exit with error if sandbox can't start instead of running unsandboxed</li>
+<li><strong>Agent initialPrompt</strong> - Agents can auto-submit a first turn via frontmatter</li>
+<li><strong>Image chips</strong> - Pasted images get <code>[Image #N]</code> labels at cursor for positional reference</li>
+<li><strong>Plugin configuration</strong> - Plugins can prompt for config at enable time, sensitive values stored in keychain</li>
+</ul>
+
+<h3>Performance</h3>
+<ul>
+<li><code>--bare -p</code> is ~14% faster to first API call</li>
+<li><code>--resume</code> uses less memory on large sessions</li>
+<li>Plugins load from disk cache instead of re-fetching</li>
+<li>Non-streaming fallback cap: 21k to 64k tokens, timeout 120s to 300s</li>
+<li>Startup ~4s faster (voice module + MCP config fetch fixes)</li>
+</ul>
+
+<h3>Notable Fixes</h3>
+<ul>
+<li>Mac sleep prevention (caffeinate not terminating) - fixed</li>
+<li>Subagents invisible after context compaction causing duplicates - fixed</li>
+<li><code>rg | wc -l</code> hanging in sandbox on Linux - fixed</li>
+<li>Memory leak in remote sessions (tool IDs accumulating) - fixed</li>
+<li>MCP tool calls hanging on SSE connection drop - fixed</li>
+<li>Scrollback jumping when thinking starts/stops - fixed</li>
+<li>Tool result files ignoring cleanupPeriodDays - fixed</li>
+</ul>
+
+<h3>Other</h3>
+<ul>
+<li><code>/status</code> works mid-response now</li>
+<li>Ctrl+L forces full screen redraw</li>
+<li>WebFetch identifies as Claude-User for robots.txt</li>
+<li>MEMORY.md index truncates at 25KB/200 lines</li>
+<li>"Stop all agents" keybinding: Ctrl+F to Ctrl+X Ctrl+K</li>
+<li>[VSCode] "Not responding" spinner after 60s, new rewind picker</li>
+</ul>

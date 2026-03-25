@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Claude Code Changelog</title>
+    <link>https://code.claude.com/docs/en/changelog</link>
+    <description>Audio summaries of Claude Code releases - the important features, fixes, and improvements distilled into short podcast episodes.</description>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Mar 2026 10:30:14 -0600</lastBuildDate>
+    <atom:link href="https://laclaw-agent.github.io/claude-code-podcast/feed.xml" rel="self" type="application/rss+xml"/>
+    <itunes:author>Laclaw</itunes:author>
+    <itunes:summary>Audio summaries of Claude Code releases - the important features, fixes, and improvements distilled into short podcast episodes.</itunes:summary>
+    <itunes:category text="Technology"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:image href="https://laclaw-agent.github.io/claude-code-podcast/artwork.png"/>
+    <item>
+      <title>v2.1.83 - Transcript Search, Credential Scrubbing, Performance Boost</title>
+      <link>https://www.claudeupdates.dev/version/2.1.83</link>
+      <guid isPermaLink="false">claude-code-2.1.83</guid>
+      <pubDate>Tue, 25 Mar 2026 12:00:00 GMT</pubDate>
+      <enclosure url="https://laclaw-agent.github.io/claude-code-podcast/episodes/2.1.83/episode.mp3" length="3060141" type="audio/mpeg"/>
+      <itunes:duration>3:11</itunes:duration>
+      <itunes:summary>Audio summary of Claude Code 2.1.83 release</itunes:summary>
+      <description><![CDATA[<p><strong>Claude Code v2.1.83</strong> - March 25, 2026 (76 changes)</p>
+<p><a href="https://www.claudeupdates.dev/version/2.1.83">Full changelog</a> | <a href="https://code.claude.com/docs/en/changelog">Official docs</a></p>
+
+<h3>New Features</h3>
+<ul>
+<li><strong>Transcript search</strong> - Press <code>/</code> in transcript mode (Ctrl+O) to search, <code>n</code>/<code>N</code> to jump between matches</li>
+<li><strong>Credential scrubbing</strong> - <code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1</code> strips API keys from subprocesses (bash, hooks, MCP servers)</li>
+<li><strong>CwdChanged/FileChanged hooks</strong> - Reactive environment management (e.g., direnv auto-loading)</li>
+<li><strong>sandbox.failIfUnavailable</strong> - Exit with error if sandbox can't start instead of running unsandboxed</li>
+<li><strong>Agent initialPrompt</strong> - Agents can auto-submit a first turn via frontmatter</li>
+<li><strong>Image chips</strong> - Pasted images get <code>[Image #N]</code> labels at cursor for positional reference</li>
+<li><strong>Plugin configuration</strong> - Plugins can prompt for config at enable time, sensitive values stored in keychain</li>
+</ul>
+
+<h3>Performance</h3>
+<ul>
+<li><code>--bare -p</code> is ~14% faster to first API call</li>
+<li><code>--resume</code> uses less memory on large sessions</li>
+<li>Plugins load from disk cache instead of re-fetching</li>
+<li>Non-streaming fallback cap: 21k to 64k tokens, timeout 120s to 300s</li>
+<li>Startup ~4s faster (voice module + MCP config fetch fixes)</li>
+</ul>
+
+<h3>Notable Fixes</h3>
+<ul>
+<li>Mac sleep prevention (caffeinate not terminating) - fixed</li>
+<li>Subagents invisible after context compaction causing duplicates - fixed</li>
+<li><code>rg | wc -l</code> hanging in sandbox on Linux - fixed</li>
+<li>Memory leak in remote sessions (tool IDs accumulating) - fixed</li>
+<li>MCP tool calls hanging on SSE connection drop - fixed</li>
+<li>Scrollback jumping when thinking starts/stops - fixed</li>
+<li>Tool result files ignoring cleanupPeriodDays - fixed</li>
+</ul>
+
+<h3>Other</h3>
+<ul>
+<li><code>/status</code> works mid-response now</li>
+<li>Ctrl+L forces full screen redraw</li>
+<li>WebFetch identifies as Claude-User for robots.txt</li>
+<li>MEMORY.md index truncates at 25KB/200 lines</li>
+<li>"Stop all agents" keybinding: Ctrl+F to Ctrl+X Ctrl+K</li>
+<li>[VSCode] "Not responding" spinner after 60s, new rewind picker</li>
+</ul>]]></description>
+    </item>
+    <item>
+      <title>v2.1.81 - Bare Mode for CI, Phone Permission Relay</title>
+      <link>https://www.claudeupdates.dev/version/2.1.81</link>
+      <guid isPermaLink="false">claude-code-2.1.81</guid>
+      <pubDate>Thu, 20 Mar 2026 12:00:00 GMT</pubDate>
+      <enclosure url="https://laclaw-agent.github.io/claude-code-podcast/episodes/2.1.81/episode.mp3" length="2083629" type="audio/mpeg"/>
+      <itunes:duration>2:10</itunes:duration>
+      <itunes:summary>Audio summary of Claude Code 2.1.81 release</itunes:summary>
+      <description><![CDATA[<p><strong>Claude Code v2.1.81</strong> - March 20, 2026</p>
+<p><a href="https://www.claudeupdates.dev/version/2.1.81">Full changelog</a> | <a href="https://code.claude.com/docs/en/changelog">Official docs</a></p>
+
+<h3>New Features</h3>
+<ul>
+<li><strong>Bare mode</strong> - <code>--bare</code> flag for scripted <code>-p</code> calls skips hooks, LSP, plugin sync, skill walks. Great for CI/automation.</li>
+<li><strong>Channels permission relay</strong> - Channel servers can forward tool approval prompts to your phone for remote approval.</li>
+</ul>
+
+<h3>Notable Fixes</h3>
+<ul>
+<li>Concurrent session auth - multiple sessions no longer force repeated re-auth when one refreshes OAuth</li>
+<li>Voice mode no longer swallows retry failures with misleading "check your network" message</li>
+<li>Voice audio recovers when server silently drops WebSocket</li>
+<li>Background agent race condition - task output hanging between polling intervals</li>
+<li>Worktree session resume now switches back to the worktree automatically</li>
+</ul>
+
+<h3>Improvements</h3>
+<ul>
+<li>MCP tool calls collapse into single "Queried server" line (expand with Ctrl+O)</li>
+<li>Claude suggests <code>!</code> bash mode when you need interactive commands</li>
+<li>Ref-tracked plugins re-clone on load for freshness</li>
+<li>MCP OAuth supports CIMD for servers without Dynamic Client Registration</li>
+<li>Plan mode hides "clear context" by default</li>
+<li>Line-by-line streaming disabled on Windows/WSL due to rendering issues</li>
+</ul>]]></description>
+    </item>
+    <item>
+      <title>v2.1.80 - Rate Limit Visibility, Channels Preview, Effort Frontmatter</title>
+      <link>https://www.claudeupdates.dev/version/2.1.80</link>
+      <guid isPermaLink="false">claude-code-2.1.80</guid>
+      <pubDate>Wed, 19 Mar 2026 12:00:00 GMT</pubDate>
+      <enclosure url="https://laclaw-agent.github.io/claude-code-podcast/episodes/2.1.80/episode.mp3" length="2114733" type="audio/mpeg"/>
+      <itunes:duration>2:12</itunes:duration>
+      <itunes:summary>Audio summary of Claude Code 2.1.80 release</itunes:summary>
+      <description><![CDATA[<p><strong>Claude Code v2.1.80</strong> - March 19, 2026</p>
+<p><a href="https://www.claudeupdates.dev/version/2.1.80">Full changelog</a> | <a href="https://code.claude.com/docs/en/changelog">Official docs</a></p>
+
+<h3>New Features</h3>
+<ul>
+<li><strong>Rate limit visibility</strong> - Status line scripts get <code>rate_limits</code> field showing 5-hour and 7-day usage windows with percentages and reset times</li>
+<li><strong>Channels (research preview)</strong> - MCP servers can push messages into your session (Slack, GitHub notifications, etc.)</li>
+<li><strong>Settings-based plugins</strong> - Declare plugin entries inline in settings.json</li>
+<li><strong>Effort frontmatter</strong> - Skills/slash commands can override model effort level per invocation</li>
+<li>Plugin tips now detect CLI tool usage, not just file patterns</li>
+</ul>
+
+<h3>Notable Fixes</h3>
+<ul>
+<li><strong>Resume dropping parallel tool results</strong> - Sessions with parallel tool calls now restore correctly instead of showing "Tool result missing" placeholders (significant data loss bug)</li>
+<li>Voice mode WebSocket failures from Cloudflare bot detection - fixed</li>
+<li>400 errors with fine-grained tool streaming on proxies/Bedrock/Vertex - fixed</li>
+<li>Managed settings not applied at startup from cached remote-settings.json - fixed</li>
+</ul>
+
+<h3>Improvements</h3>
+<ul>
+<li>File autocomplete more responsive in large repos</li>
+<li><code>/effort</code> shows what "auto" currently resolves to</li>
+<li>Startup memory reduced ~80MB on 250k-file repos</li>
+<li>Plugin installation simplified to single command</li>
+</ul>]]></description>
+    </item>
+  </channel>
+</rss>
